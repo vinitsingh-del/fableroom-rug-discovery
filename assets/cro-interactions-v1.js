@@ -1,0 +1,329 @@
+(() => {
+  const mobileView = window.matchMedia("(max-width: 760px)");
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const helpStorageKey = "fableroom-rug-help-seen";
+
+  const safeStorage = {
+    get() {
+      try {
+        return window.sessionStorage.getItem(helpStorageKey);
+      } catch {
+        return null;
+      }
+    },
+    set() {
+      try {
+        window.sessionStorage.setItem(helpStorageKey, "true");
+      } catch {
+        // Browsing must continue even when storage is unavailable.
+      }
+    },
+  };
+
+  const labelElement = (element, action, placement) => {
+    if (!element) return;
+    const label =
+      element.getAttribute("aria-label") ||
+      element.textContent?.replace(/\s+/g, " ").trim() ||
+      action;
+
+    element.dataset.croAction = action;
+    element.dataset.croLabel = label;
+    element.dataset.croPlacement = placement;
+  };
+
+  const applyCroLabels = () => {
+    const sections = [
+      ["#top", "hero"],
+      [".craft-film-section", "style-discovery"],
+      ["#find", "room-discovery"],
+      ["#shop", "rug-catalogue"],
+      ["#colour-shop", "colour-discovery"],
+      [".price-edit-section", "price-discovery"],
+      ["#craft", "range-discovery"],
+      ["#guide", "rug-finder"],
+    ];
+
+    for (const [selector, name] of sections) {
+      const section = document.querySelector(selector);
+      if (!section) continue;
+      section.dataset.croSection = name;
+      if (!section.getAttribute("aria-label")) {
+        section.setAttribute("aria-label", name.replace(/-/g, " "));
+      }
+    }
+
+    document
+      .querySelectorAll('.site-header a[href], .mobile-menu a[href]')
+      .forEach((element) => labelElement(element, "navigation", "header"));
+
+    document
+      .querySelectorAll('.product-card a[href*="/products/"]')
+      .forEach((element) => labelElement(element, "view-rug", "product-card"));
+
+    document
+      .querySelectorAll(".product-media button")
+      .forEach((element) => labelElement(element, "save-rug", "product-card"));
+
+    document
+      .querySelectorAll(
+        ".filter-axis-tabs button, .filter-option-row button, .colour-filter-row button, .discovery-filter-row button, .finder-panel fieldset button",
+      )
+      .forEach((element) =>
+        labelElement(element, "select-filter", "rug-discovery"),
+      );
+
+    document
+      .querySelectorAll(".price-ticket")
+      .forEach((element) => {
+        labelElement(element, "shop-price-range", "price-discovery");
+        if (!element.getAttribute("aria-label")) {
+          element.setAttribute(
+            "aria-label",
+            `Shop rugs ${element.querySelector("strong")?.textContent || "by price"}`,
+          );
+        }
+      });
+
+    document
+      .querySelectorAll(
+        ".hero-cut-button, .hero-product-cta, .colour-card-cta, .finder-result > a, .craft-film-cta, .mobile-shopbar a",
+      )
+      .forEach((element) => labelElement(element, "primary-cta", "page"));
+
+    document.querySelectorAll('a[href^="#"]').forEach((element) => {
+      const targetId = element.getAttribute("href")?.slice(1);
+      if (targetId && !document.getElementById(targetId)) {
+        element.dataset.croTargetMissing = "true";
+      }
+    });
+  };
+
+  const setupInteractionTracking = () => {
+    if (document.documentElement.dataset.croTrackingReady) return;
+    document.documentElement.dataset.croTrackingReady = "true";
+
+    document.addEventListener(
+      "click",
+      (event) => {
+        const target = event.target.closest?.("[data-cro-action]");
+        if (!target) return;
+
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: "cro_interaction",
+          cro_action: target.dataset.croAction,
+          cro_label: target.dataset.croLabel,
+          cro_placement: target.dataset.croPlacement,
+        });
+      },
+      { passive: true },
+    );
+  };
+
+  const setupMobilePriceMotion = () => {
+    const rail = document.querySelector(".price-edit-rail");
+    if (!rail || rail.dataset.autoMotionReady) return;
+    rail.dataset.autoMotionReady = "true";
+
+    const originals = [...rail.querySelectorAll(".price-ticket")];
+    let timer = 0;
+    let visible = false;
+    let pausedUntil = 0;
+
+    const removeClones = () => {
+      rail.querySelectorAll(".price-ticket-clone").forEach((clone) => clone.remove());
+      rail.scrollLeft = Math.min(rail.scrollLeft, rail.scrollWidth);
+    };
+
+    const ensureClones = () => {
+      if (!mobileView.matches || rail.querySelector(".price-ticket-clone")) return;
+      originals.forEach((card) => {
+        const clone = card.cloneNode(true);
+        clone.classList.add("price-ticket-clone");
+        clone.setAttribute("aria-hidden", "true");
+        clone.setAttribute("tabindex", "-1");
+        clone.querySelectorAll("a, button").forEach((control) => {
+          control.setAttribute("tabindex", "-1");
+        });
+        rail.appendChild(clone);
+      });
+    };
+
+    const pause = () => {
+      pausedUntil = Date.now() + 5000;
+    };
+
+    const advance = () => {
+      if (
+        !mobileView.matches ||
+        reducedMotion.matches ||
+        !visible ||
+        document.hidden ||
+        Date.now() < pausedUntil
+      ) {
+        return;
+      }
+
+      ensureClones();
+      const firstCard = originals[0];
+      if (!firstCard) return;
+
+      const gap = parseFloat(getComputedStyle(rail).gap) || 9;
+      const step = firstCard.getBoundingClientRect().width + gap;
+      const loopWidth = rail.scrollWidth / 2;
+
+      rail.scrollBy({ left: step, behavior: "smooth" });
+      window.setTimeout(() => {
+        if (rail.scrollLeft >= loopWidth - 2) {
+          rail.scrollLeft -= loopWidth;
+        }
+      }, 480);
+    };
+
+    const restart = () => {
+      window.clearInterval(timer);
+      if (mobileView.matches && !reducedMotion.matches) {
+        ensureClones();
+        timer = window.setInterval(advance, 1700);
+      } else {
+        removeClones();
+      }
+    };
+
+    ["pointerdown", "touchstart", "wheel", "focusin"].forEach((eventName) => {
+      rail.addEventListener(eventName, pause, { passive: true });
+    });
+
+    const visibilityObserver = new IntersectionObserver(
+      ([entry]) => {
+        visible = entry.isIntersecting;
+      },
+      { threshold: 0.22 },
+    );
+    visibilityObserver.observe(rail);
+
+    mobileView.addEventListener?.("change", restart);
+    reducedMotion.addEventListener?.("change", restart);
+    restart();
+  };
+
+  const createRugHelp = () => {
+    if (document.querySelector(".cro-rug-help")) return;
+
+    const help = document.createElement("aside");
+    help.className = "cro-rug-help";
+    help.setAttribute("role", "dialog");
+    help.setAttribute("aria-modal", "false");
+    help.setAttribute("aria-labelledby", "cro-rug-help-title");
+    help.innerHTML = `
+      <button class="cro-rug-help-close" type="button" aria-label="Close rug help">×</button>
+      <div class="cro-rug-help-rugs" aria-hidden="true">
+        <img src="./assets/FRRU00065_render.png" alt="" />
+        <img src="./assets/FRRU00032A_1.png" alt="" />
+        <img src="./assets/FRRU00246P.png" alt="" />
+      </div>
+      <div class="cro-rug-help-copy">
+        <small>Still not sure?</small>
+        <h2 id="cro-rug-help-title">Let us help find your rug.</h2>
+        <p>Tell the FableRoom team about your room, size and style for a clearer starting point.</p>
+        <div class="cro-rug-help-actions">
+          <a href="https://fableroom.com/pages/contact">Reach our rug team <span>→</span></a>
+          <button type="button">Keep browsing</button>
+        </div>
+      </div>
+    `;
+
+    let dismissed = false;
+    const dismiss = () => {
+      if (dismissed) return;
+      dismissed = true;
+      help.classList.add("is-closing");
+      safeStorage.set();
+      document.removeEventListener("keydown", handleEscape);
+      window.setTimeout(() => help.remove(), reducedMotion.matches ? 0 : 220);
+    };
+
+    help.querySelector(".cro-rug-help-close").addEventListener("click", dismiss);
+    help
+      .querySelector(".cro-rug-help-actions button")
+      .addEventListener("click", dismiss);
+    help.querySelector(".cro-rug-help-actions a").addEventListener("click", () => {
+      safeStorage.set();
+    });
+
+    const handleEscape = (event) => {
+      if (event.key !== "Escape") return;
+      dismiss();
+    };
+    document.addEventListener("keydown", handleEscape);
+
+    document.body.appendChild(help);
+    labelElement(
+      help.querySelector(".cro-rug-help-actions a"),
+      "contact-rug-team",
+      "scroll-depth-help",
+    );
+    labelElement(
+      help.querySelector(".cro-rug-help-close"),
+      "dismiss-help",
+      "scroll-depth-help",
+    );
+    labelElement(
+      help.querySelector(".cro-rug-help-actions button"),
+      "dismiss-help",
+      "scroll-depth-help",
+    );
+    window.requestAnimationFrame(() => help.classList.add("is-visible"));
+  };
+
+  const setupScrollDepthHelp = () => {
+    if (safeStorage.get()) return;
+    let shown = false;
+    let frame = 0;
+
+    const checkDepth = () => {
+      frame = 0;
+      if (shown) return;
+      const viewport = Math.max(window.innerHeight, 1);
+      if (window.scrollY < viewport * 7) return;
+
+      shown = true;
+      safeStorage.set();
+      createRugHelp();
+      window.removeEventListener("scroll", scheduleDepthCheck);
+    };
+
+    const scheduleDepthCheck = () => {
+      if (frame) return;
+      frame = window.requestAnimationFrame(checkDepth);
+    };
+
+    window.addEventListener("scroll", scheduleDepthCheck, { passive: true });
+    checkDepth();
+  };
+
+  const initialise = () => {
+    const mount = () => {
+      if (!document.querySelector("#shop")) return false;
+      applyCroLabels();
+      setupInteractionTracking();
+      setupMobilePriceMotion();
+      setupScrollDepthHelp();
+      return true;
+    };
+
+    if (mount()) return;
+    const observer = new MutationObserver(() => {
+      if (!mount()) return;
+      observer.disconnect();
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initialise, { once: true });
+  } else {
+    initialise();
+  }
+})();

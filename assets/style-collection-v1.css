@@ -229,6 +229,315 @@
   }
 }
 
+/* Scroll-performance and interaction stability */
+html,
+body {
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 96px;
+  scrollbar-gutter: stable;
+}
+
+.site-header,
+.toolbar {
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+.site-header {
+  background: #fdfaf7fa;
+}
+
+.toolbar {
+  background-color: #f2ede2fa;
+}
+
+.room-grid,
+.style-discovery-rail,
+.colour-product-rail,
+.price-edit-rail,
+.filter-toolbar-track,
+.chip-row {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-inline: auto;
+  scroll-snap-type: inline proximity;
+  touch-action: pan-x pan-y pinch-zoom;
+}
+
+/* Scroll-depth rug assistance */
+.cro-rug-help {
+  position: fixed;
+  z-index: 1200;
+  right: 24px;
+  bottom: 24px;
+  width: min(420px, calc(100% - 32px));
+  max-height: calc(100dvh - 48px);
+  overflow: auto;
+  border: 1px solid #260b0f;
+  border-radius: 16px;
+  background: var(--paper);
+  box-shadow: 0 24px 70px #260b0f3d;
+  opacity: 0;
+  transform: translateY(22px) scale(0.98);
+  transition:
+    opacity 220ms ease,
+    transform 220ms ease;
+}
+
+.cro-rug-help.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.cro-rug-help.is-closing {
+  opacity: 0;
+  transform: translateY(12px) scale(0.98);
+}
+
+.cro-rug-help-close {
+  position: absolute;
+  z-index: 2;
+  top: 8px;
+  right: 8px;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #ffffff8c;
+  border-radius: 50%;
+  background: #260b0fd6;
+  color: #fff;
+  cursor: pointer;
+  font-size: 24px;
+  line-height: 1;
+}
+
+.cro-rug-help-rugs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  height: 86px;
+  overflow: hidden;
+  border-bottom: 1px solid var(--line);
+}
+
+.cro-rug-help-rugs img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cro-rug-help-rugs img + img {
+  border-left: 1px solid #ffffff59;
+}
+
+.cro-rug-help-copy {
+  position: relative;
+  padding: 18px;
+}
+
+.cro-rug-help-copy::before {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border: 1px dashed #b77e455c;
+  border-radius: 10px;
+  pointer-events: none;
+}
+
+.cro-rug-help-copy > * {
+  position: relative;
+  z-index: 1;
+}
+
+.cro-rug-help-copy small {
+  color: var(--gold);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.cro-rug-help-copy h2 {
+  margin: 7px 0 8px;
+  font-family: Ivy, Georgia, serif;
+  font-size: 29px;
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  line-height: 1;
+}
+
+.cro-rug-help-copy p {
+  margin: 0;
+  color: var(--sage);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.cro-rug-help-actions {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 7px;
+  margin-top: 15px;
+}
+
+.cro-rug-help-actions a,
+.cro-rug-help-actions button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  border: 1px solid var(--ink);
+  border-radius: 6px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.cro-rug-help-actions a {
+  justify-content: space-between;
+  background: var(--ink);
+  color: #fff;
+  padding: 0 13px;
+}
+
+.cro-rug-help-actions a span {
+  color: #dcb47d;
+  font-size: 15px;
+}
+
+.cro-rug-help-actions button {
+  background: transparent;
+  color: var(--ink);
+}
+
+.cro-rug-help-close:focus-visible,
+.cro-rug-help-actions a:focus-visible,
+.cro-rug-help-actions button:focus-visible,
+.mobile-shopbar a:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+@media (width <= 760px) {
+  html {
+    scroll-padding-top: 54px;
+    scrollbar-gutter: auto;
+  }
+
+  .site-header {
+    background: var(--paper);
+  }
+
+  .mobile-shopbar {
+    right: 12px;
+    bottom: max(9px, env(safe-area-inset-bottom, 9px));
+    left: 12px;
+    grid-template-columns: 0.95fr 1.25fr;
+    width: auto;
+    height: 49px;
+    overflow: hidden;
+    border: 1px solid #674334;
+    border-radius: 7px;
+    background-image:
+      linear-gradient(90deg, #f8f4eaf0, #eee3d4e8),
+      url("./FRRU00065_render.png");
+    background-position: center;
+    background-size: cover;
+    box-shadow: 0 9px 28px #260b0f38;
+  }
+
+  .mobile-shopbar:not(.is-scroll-ready) {
+    transform: translateY(
+      calc(100% + 18px + env(safe-area-inset-bottom, 0px))
+    );
+  }
+
+  .mobile-shopbar a {
+    position: relative;
+    min-width: 0;
+    min-height: 49px;
+    padding: 0 10px;
+    font-size: 9px;
+    letter-spacing: 0.075em;
+  }
+
+  .mobile-shopbar a:first-child {
+    border-right: 1px solid #674334;
+    background: #fffaf1e8;
+  }
+
+  .mobile-shopbar a:first-child::after {
+    content: "";
+    position: absolute;
+    inset: 4px;
+    border: 1px dashed #8b664e66;
+    border-radius: 3px;
+    pointer-events: none;
+  }
+
+  .mobile-shopbar a:last-child {
+    gap: 12px;
+    background-image:
+      linear-gradient(90deg, #260b0fe8, #4e171edb),
+      url("./FRRU00065_render.png");
+    background-position: center;
+    background-size: cover;
+  }
+
+  .cro-rug-help {
+    right: 12px;
+    bottom: calc(68px + env(safe-area-inset-bottom, 0px));
+    left: 12px;
+    width: auto;
+    max-height: calc(100dvh - 88px);
+    border-radius: 13px;
+  }
+
+  .cro-rug-help-rugs {
+    height: 64px;
+  }
+
+  .cro-rug-help-copy {
+    padding: 14px;
+  }
+
+  .cro-rug-help-copy h2 {
+    margin-top: 5px;
+    font-size: 24px;
+  }
+
+  .cro-rug-help-copy p {
+    font-size: 10px;
+  }
+
+  .cro-rug-help-actions {
+    margin-top: 12px;
+  }
+
+  .cro-rug-help-actions a,
+  .cro-rug-help-actions button {
+    min-height: 40px;
+    font-size: 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .cro-rug-help {
+    transition: none;
+  }
+}
+
 /* Integrated style and technique discovery hub */
 .hero-story h1 {
   font-size: clamp(40px, 3.8vw, 62px);
