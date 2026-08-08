@@ -26,29 +26,35 @@
   .hero-story h1 {
     order: 1;
     text-align: center;
-    max-width: 390px;
+    max-width: 100%;
     margin: 0 auto;
     padding-top: 10px;
-    font-size: clamp(36.55px, 10.37vw, 45.05px);
-    line-height: 0.9;
+    font-size: clamp(24px, 8vw, 34px);
+    line-height: 0.95;
     letter-spacing: -0.04em;
     text-wrap: balance;
+    white-space: nowrap;
+  }
+  .hero-story h1 > br:nth-of-type(2) {
+    display: none;
   }
   .hero-story h1 em {
     display: inline-block;
+    margin-left: 4px;
     white-space: nowrap;
   }
   .hero-story h1 .title-rug-dots {
-    margin-left: 4px;
+    margin-right: 2px;
+    margin-left: 3px;
     transform: translateY(1px);
   }
   .hero-story h1 .title-rug-dots i {
-    width: 31px;
-    height: 31px;
+    width: clamp(21px, 6.3vw, 27px);
+    height: clamp(21px, 6.3vw, 27px);
     border-width: 1.5px;
   }
   .hero-story h1 .title-rug-dots i + i {
-    margin-left: -8px;
+    margin-left: -6px;
   }
   .hero-story > p:not(.eyebrow) {
     order: 2;
@@ -330,7 +336,7 @@
 
 @media (width <= 390px) {
   .hero-story h1 {
-    font-size: 36.55px;
+    font-size: clamp(24px, 8vw, 31.2px);
   }
   .hero-story > p:not(.eyebrow) {
     margin: 8px auto 10px;
