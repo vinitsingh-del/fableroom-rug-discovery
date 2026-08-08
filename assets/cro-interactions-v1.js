@@ -32,6 +32,107 @@
     element.dataset.croPlacement = placement;
   };
 
+  const applyCopyPolish = () => {
+    if (document.documentElement.dataset.rugCopyPolished) return;
+    document.documentElement.dataset.rugCopyPolished = "true";
+
+    const setText = (selector, copy) => {
+      const element = document.querySelector(selector);
+      if (element) element.textContent = copy;
+    };
+
+    const replaceTextNode = (selector, currentCopy, revisedCopy) => {
+      const element = document.querySelector(selector);
+      if (!element) return;
+
+      const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT);
+      let node = walker.nextNode();
+      while (node) {
+        if (node.nodeValue?.trim() === currentCopy) {
+          node.nodeValue = node.nodeValue.replace(currentCopy, revisedCopy);
+        }
+        node = walker.nextNode();
+      }
+    };
+
+    setText(
+      ".craft-film-content .eyebrow",
+      "60-RUG STYLE DISCOVERY",
+    );
+    replaceTextNode(
+      ".craft-film-content h2",
+      "One discovery hub.",
+      "One rug discovery hub.",
+    );
+    replaceTextNode(
+      ".craft-film-content h2",
+      "Two ways into the range.",
+      "Two ways to find your rug.",
+    );
+    setText(
+      ".craft-film-intro",
+      "Filter 60 rugs by the style you love or how each rug is made. Every result opens the matching FableRoom rug.",
+    );
+    setText(
+      ".discovery-section .section-heading > p",
+      "Start with the room you are furnishing, then compare the right rug sizes, textures and practical finishes.",
+    );
+    setText(
+      ".shop-intro h2",
+      "Every rug style. A clearer way to choose.",
+    );
+    setText(
+      ".price-edit-heading h3",
+      "Beautiful rugs for every budget.",
+    );
+    setText(
+      ".price-edit-heading > span",
+      "Four clear rug price ranges",
+    );
+    replaceTextNode(
+      ".range-map .section-heading h2",
+      "your right rug.",
+      "the right rug.",
+    );
+    replaceTextNode(
+      ".finder-pin b",
+      "One clearer edit.",
+      "One focused rug edit.",
+    );
+    setText(
+      ".finder-lead",
+      "Choose your room, mood and preferred finish. We will create a focused FableRoom rug edit in three quick steps.",
+    );
+    setText(".finder-result small", "Your rug match");
+    replaceTextNode(
+      ".craft-copy h2",
+      "every style.",
+      "every rug.",
+    );
+    setText(
+      ".craft-copy > p:not(.eyebrow)",
+      "Rug construction shapes the feel, detail and price. Here is the practical difference—without the jargon.",
+    );
+    setText(".craft-list article:nth-child(1) h3", "Hand-woven rugs");
+    setText(
+      ".craft-list article:nth-child(1) p",
+      "Low-profile, tactile and versatile. Hand-woven rugs suit busy rooms, relaxed interiors and natural textures.",
+    );
+    setText(".craft-list article:nth-child(2) h3", "Hand-tufted rugs");
+    setText(
+      ".craft-list article:nth-child(2) p",
+      "Plush underfoot with expressive colour and sculpted detail. Hand-tufted rugs balance comfort with visual impact.",
+    );
+    setText(".craft-list article:nth-child(3) h3", "Hand-knotted rugs");
+    setText(
+      ".craft-list article:nth-child(3) p",
+      "Individually knotted for exceptional detail and lasting quality. Hand-knotted rugs are the heirloom choice.",
+    );
+    setText(".guide-grid article:nth-child(1) h3", "Choose the right rug size");
+    setText(".guide-grid article:nth-child(2) h3", "Choose rug fibre for real life");
+    setText(".guide-grid article:nth-child(3) h3", "Let your rug connect the room");
+  };
+
   const applyCroLabels = () => {
     const sections = [
       ["#top", "hero"],
@@ -306,6 +407,7 @@
   const initialise = () => {
     const mount = () => {
       if (!document.querySelector("#shop")) return false;
+      applyCopyPolish();
       applyCroLabels();
       setupInteractionTracking();
       setupMobilePriceMotion();

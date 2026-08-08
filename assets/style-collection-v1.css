@@ -1771,3 +1771,53 @@ html {
     color: #fff;
   }
 }
+
+/* Centred mobile craft cards: preserve typography and image footprint. */
+@media (width <= 760px) {
+  .craft-section {
+    justify-items: stretch;
+  }
+
+  .craft-copy {
+    text-align: center;
+  }
+
+  .craft-copy > p:not(.eyebrow) {
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .craft-copy .text-link {
+    display: inline-block;
+  }
+
+  .craft-list article {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+    gap: 14px;
+    padding: 32px 0;
+    text-align: center;
+  }
+
+  .craft-list > article > span,
+  .craft-list article > div,
+  .craft-list img {
+    grid-column: 1;
+  }
+
+  .craft-list article > div {
+    width: min(100%, 380px);
+    margin: 0 auto;
+  }
+
+  .craft-list p {
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .craft-list img {
+    width: calc(100% - 50px);
+    max-width: 568px;
+    margin: 4px auto 0;
+  }
+}
