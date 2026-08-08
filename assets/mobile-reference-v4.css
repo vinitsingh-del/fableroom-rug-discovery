@@ -1,0 +1,268 @@
+/* Mobile reference alignment — deliberately scoped so desktop remains unchanged. */
+@media (width <= 760px) {
+  .hero-showcase {
+    overflow: visible;
+  }
+  .hero-frame {
+    display: flex;
+    flex-direction: column;
+    padding: 0 16px 28px;
+  }
+  .hero-story,
+  .hero-merch {
+    display: contents;
+  }
+  .hero-story > .eyebrow,
+  .hero-merch-heading,
+  .hero-rug-tabs {
+    display: none;
+  }
+  .hero-story h1 {
+    order: 1;
+    text-align: center;
+    max-width: 390px;
+    margin: 0 auto;
+    padding-top: 38px;
+    font-size: clamp(43px, 12.2vw, 53px);
+    line-height: 0.93;
+  }
+  .hero-story > p:not(.eyebrow) {
+    order: 2;
+    text-align: center;
+    max-width: 360px;
+    margin: 22px auto 26px;
+    font-size: 13px;
+    line-height: 1.62;
+  }
+  .rug-stage {
+    order: 3;
+    border-top: 0;
+    padding: 0;
+  }
+  .rug-window {
+    aspect-ratio: 3 / 4;
+    width: 100%;
+    height: auto;
+    max-height: 530px;
+    border: 1px solid var(--ink);
+    box-shadow: 0 12px 30px #2e1c1617;
+  }
+  .rug-slide {
+    object-fit: cover;
+  }
+  .rug-index {
+    bottom: 0;
+    left: 0;
+    border-left: 0;
+    border-bottom: 0;
+    padding: 9px 12px;
+    box-shadow: none;
+  }
+  .rug-index b {
+    font-size: 18px;
+  }
+  .rug-motion-nav {
+    height: 35px;
+    margin: 0 0 24px;
+  }
+  .rug-motion-nav button {
+    height: 35px;
+    min-width: 35px;
+    min-height: 35px;
+  }
+  .hero-product-title {
+    order: 4;
+    text-align: center;
+    display: block;
+    width: 100%;
+    margin-top: 2px;
+  }
+  .hero-product-title p {
+    margin-bottom: 7px;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+  }
+  .hero-product-title h3 {
+    font-size: 30px;
+    line-height: 1;
+  }
+  .hero-product-title button {
+    display: none;
+  }
+  .hero-detail-image {
+    order: 5;
+    border: 0;
+    width: 78px;
+    height: 82px;
+    margin: 17px auto 16px;
+    overflow: visible;
+    text-align: center;
+  }
+  .hero-detail-image::before {
+    content: "";
+    display: block;
+    width: 34px;
+    height: 34px;
+    margin: 0 auto 10px;
+    border-radius: 50%;
+    background: var(--gold);
+    opacity: 0.62;
+  }
+  .hero-detail-image img {
+    width: 64px;
+    height: 38px;
+    margin: auto;
+    object-fit: cover;
+  }
+  .hero-detail-image span {
+    position: static;
+    display: block;
+    background: transparent;
+    padding: 7px 0 0;
+    font-size: 8px;
+    letter-spacing: 0.11em;
+    white-space: nowrap;
+  }
+  .hero-product-copy {
+    order: 6;
+    text-align: center;
+    margin: 10px auto 16px;
+    max-width: 390px;
+    font-size: 12px;
+    line-height: 1.55;
+  }
+  .hero-merch dl {
+    order: 7;
+    width: 100%;
+    margin: 0;
+  }
+  .hero-merch dl > div {
+    padding: 9px 0;
+  }
+  .hero-merch dt,
+  .hero-merch dd {
+    font-size: 10px;
+  }
+  .hero-story-actions {
+    order: 8;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+    margin-top: 18px;
+  }
+  .hero-cut-button {
+    clip-path: none;
+    justify-content: center;
+    width: 100%;
+    height: 50px;
+  }
+  .hero-story-actions .text-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 50px;
+    border: 1px solid var(--ink);
+    padding: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 10px;
+  }
+  .hero-product-cta {
+    order: 9;
+    width: 100%;
+    height: 50px;
+    margin-top: 10px;
+  }
+  .hero-service {
+    order: 10;
+    width: 100%;
+    margin-top: 30px;
+  }
+
+  .discovery-section {
+    padding: 66px 14px 76px;
+  }
+  .discovery-section .section-heading {
+    display: block;
+    text-align: center;
+    margin-bottom: 34px;
+  }
+  .discovery-section .section-heading .eyebrow {
+    margin-bottom: 18px;
+    font-size: 10px;
+    letter-spacing: 0.26em;
+  }
+  .discovery-section .section-heading h2 {
+    font-size: clamp(42px, 11.6vw, 50px);
+    line-height: 0.94;
+  }
+  .discovery-section .section-heading > p {
+    display: none;
+  }
+  .room-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+  }
+  .room-card {
+    min-width: 0;
+    aspect-ratio: 0.68;
+    border-radius: 15px;
+    overflow: hidden;
+  }
+  .room-card img,
+  .room-card.room-tall img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .room-overlay {
+    grid-template-columns: 1fr auto;
+    gap: 7px;
+    padding: 54px 12px 14px;
+    background: linear-gradient(#0000 15%, #260b0fcf 100%);
+  }
+  .room-overlay small {
+    display: none;
+  }
+  .room-overlay h3 {
+    font-size: clamp(22px, 6.2vw, 28px);
+    line-height: 1;
+  }
+  .room-overlay p {
+    font-size: 9px;
+    line-height: 1.35;
+  }
+  .room-overlay > span {
+    font-size: 18px;
+  }
+}
+
+@media (width <= 390px) {
+  .hero-story h1 {
+    font-size: 43px;
+  }
+  .rug-window {
+    max-height: 500px;
+  }
+  .discovery-section .section-heading h2 {
+    font-size: 42px;
+  }
+  .room-grid {
+    gap: 9px;
+  }
+  .room-overlay {
+    padding: 48px 10px 12px;
+  }
+  .room-overlay h3 {
+    font-size: 21px;
+  }
+  .room-overlay p {
+    font-size: 8px;
+  }
+}
