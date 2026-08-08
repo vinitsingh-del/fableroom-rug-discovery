@@ -1821,3 +1821,296 @@ html {
     margin: 4px auto 0;
   }
 }
+
+/* Deep mobile rhythm pass: remove avoidable vertical gaps without shrinking copy. */
+@media (width <= 760px) {
+  .hero-frame {
+    padding-right: 14px;
+    padding-left: 14px;
+  }
+
+  .hero-story {
+    padding: 28px 0 22px;
+  }
+
+  .hero-story > p:not(.eyebrow) {
+    margin: 16px 0;
+  }
+
+  .hero-story-actions {
+    gap: 13px;
+  }
+
+  .hero-service {
+    margin-top: 20px;
+  }
+
+  .hero-service span {
+    min-height: 44px;
+    padding: 6px;
+  }
+
+  .rug-stage {
+    padding-top: 12px;
+  }
+
+  .rug-motion-nav {
+    margin-bottom: 20px;
+  }
+
+  .hero-merch {
+    padding: 26px 0 28px;
+  }
+
+  .hero-merch > .hero-rug-tabs {
+    margin: 16px 0;
+  }
+
+  .hero-detail-image {
+    margin-bottom: 14px;
+  }
+
+  .hero-product-copy {
+    margin: 10px 0;
+  }
+
+  .hero-product-cta {
+    margin-top: 9px;
+  }
+
+  .route-strip a {
+    min-height: 48px;
+    padding: 13px 18px;
+  }
+
+  .craft-film-content {
+    padding: 36px 14px 40px;
+  }
+
+  .craft-film-intro {
+    margin: 16px 0 19px;
+  }
+
+  .discovery-hub-meta {
+    padding-top: 11px;
+  }
+
+  .discovery-mode-switch {
+    margin-top: 12px;
+  }
+
+  .discovery-filter-row {
+    margin: 10px 0 12px;
+  }
+
+  .discovery-hub-footer {
+    margin-top: 13px;
+    padding-top: 13px;
+  }
+
+  .discovery-section,
+  .shop-section,
+  .range-map,
+  .craft-section,
+  .guide-section,
+  .faq-section {
+    padding-top: 44px;
+    padding-bottom: 44px;
+  }
+
+  .eyebrow {
+    margin-bottom: 11px;
+  }
+
+  .section-heading {
+    gap: 16px;
+    margin-bottom: 26px;
+  }
+
+  .section-heading > p {
+    margin-bottom: 0;
+  }
+
+  .room-grid {
+    gap: 9px;
+  }
+
+  .room-card img,
+  .room-card.room-tall img {
+    height: 420px;
+  }
+
+  .room-overlay {
+    padding: 48px 17px 17px;
+  }
+
+  .shop-intro {
+    margin-bottom: 22px;
+  }
+
+  .shop-intro > p:last-child {
+    margin-top: 12px;
+  }
+
+  .toolbar.multi-filter-toolbar {
+    margin-bottom: 18px;
+  }
+
+  .product-card {
+    margin-bottom: 18px;
+  }
+
+  .product-info {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .choose {
+    margin-top: 9px;
+    padding-top: 8px;
+  }
+
+  .colour-shop-section {
+    margin-top: 24px;
+    margin-bottom: 26px;
+    padding-top: 31px;
+    padding-bottom: 34px;
+  }
+
+  .colour-filter-row {
+    margin-top: 14px;
+    margin-bottom: 13px;
+  }
+
+  .colour-product-rail {
+    padding-bottom: 5px;
+  }
+
+  .colour-product-card > div {
+    min-height: 108px;
+    padding-top: 11px;
+    padding-bottom: 10px;
+  }
+
+  .price-edit-section {
+    margin-top: 22px;
+    margin-bottom: 24px;
+    padding-top: 18px;
+    padding-bottom: 20px;
+  }
+
+  .range-grid {
+    gap: 8px;
+  }
+
+  .range-card > img {
+    height: 270px;
+  }
+
+  .range-card > div {
+    padding: 24px 20px;
+  }
+
+  .range-card h3 {
+    margin: 12px 0;
+  }
+
+  .range-card a {
+    margin-top: 16px;
+  }
+
+  .finder-section {
+    padding: 16px 12px 28px;
+  }
+
+  .finder-visual {
+    min-height: 250px;
+  }
+
+  .finder-panel {
+    padding: 20px 12px 12px;
+  }
+
+  .finder-panel fieldset {
+    margin-top: 6px;
+    padding-top: 7px;
+  }
+
+  .finder-result {
+    margin-top: 10px;
+  }
+
+  .craft-section {
+    gap: 28px;
+  }
+
+  .craft-copy > p:not(.eyebrow) {
+    margin-top: 18px;
+    margin-bottom: 18px;
+  }
+
+  .craft-list article {
+    gap: 12px;
+    padding: 24px 0;
+  }
+
+  .craft-list img {
+    height: 200px;
+  }
+
+  .custom-banner {
+    min-height: 560px;
+    padding: 20px;
+  }
+
+  .custom-banner > div > p:not(.eyebrow) {
+    margin: 18px 0;
+  }
+
+  .guide-title {
+    gap: 12px;
+    margin-bottom: 26px;
+  }
+
+  .guide-grid article {
+    padding: 22px 4px;
+  }
+
+  .guide-grid h3 {
+    margin-top: 16px;
+  }
+
+  .faq-section {
+    gap: 28px;
+  }
+
+  .faqs summary {
+    padding: 18px 0;
+  }
+
+  .faqs details p {
+    padding: 0 24px 18px 0;
+  }
+
+  footer {
+    padding: 44px 18px 14px;
+  }
+
+  .footer-top {
+    gap: 16px;
+    padding-bottom: 28px;
+  }
+
+  .footer-grid {
+    gap: 30px 20px;
+    padding: 34px 0;
+  }
+
+  .footer-note {
+    padding-top: 18px;
+  }
+
+  .footer-bottom {
+    padding-bottom: calc(58px + env(safe-area-inset-bottom, 0px));
+  }
+}
