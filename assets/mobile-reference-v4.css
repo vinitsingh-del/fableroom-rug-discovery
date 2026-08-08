@@ -6,7 +6,7 @@
   .hero-frame {
     display: flex;
     flex-direction: column;
-    padding: 0 16px 28px;
+    padding: 0 16px 14px;
   }
   .hero-story,
   .hero-merch {
@@ -21,17 +21,23 @@
     text-align: center;
     max-width: 390px;
     margin: 0 auto;
-    padding-top: 38px;
+    padding-top: 10px;
     font-size: clamp(43px, 12.2vw, 53px);
-    line-height: 0.93;
+    line-height: 0.84;
+    letter-spacing: -0.055em;
   }
   .hero-story > p:not(.eyebrow) {
     order: 2;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
     text-align: center;
-    max-width: 360px;
-    margin: 22px auto 26px;
-    font-size: 13px;
-    line-height: 1.62;
+    max-width: 100%;
+    margin: 10px auto 12px;
+    font-size: clamp(10px, 2.8vw, 11px);
+    line-height: 1.35;
+    letter-spacing: -0.015em;
   }
   .rug-stage {
     order: 3;
@@ -62,7 +68,7 @@
   }
   .rug-motion-nav {
     height: 35px;
-    margin: 0 0 24px;
+    margin: 0 0 12px;
   }
   .rug-motion-nav button {
     height: 35px;
@@ -74,7 +80,7 @@
     text-align: center;
     display: block;
     width: 100%;
-    margin-top: 2px;
+    margin-top: 0;
   }
   .hero-product-title p {
     margin-bottom: 7px;
@@ -94,7 +100,7 @@
     grid-template-columns: repeat(4, minmax(0, 1fr));
     width: 100%;
     gap: 5px;
-    margin: 18px 0 5px;
+    margin: 10px 0 2px;
   }
   .hero-rug-tabs button {
     min-width: 0;
@@ -108,8 +114,8 @@
     order: 6;
     border: 0;
     width: 78px;
-    height: 82px;
-    margin: 17px auto 16px;
+    height: 76px;
+    margin: 9px auto 8px;
     overflow: visible;
     text-align: center;
   }
@@ -141,10 +147,10 @@
   .hero-product-copy {
     order: 7;
     text-align: center;
-    margin: 10px auto 16px;
+    margin: 5px auto 9px;
     max-width: 390px;
-    font-size: 12px;
-    line-height: 1.55;
+    font-size: 11px;
+    line-height: 1.4;
   }
   .hero-merch dl {
     order: 8;
@@ -152,7 +158,7 @@
     margin: 0;
   }
   .hero-merch dl > div {
-    padding: 9px 0;
+    padding: 7px 0;
   }
   .hero-merch dt,
   .hero-merch dd {
@@ -163,8 +169,8 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    gap: 10px;
-    margin-top: 18px;
+    gap: 8px;
+    margin-top: 10px;
   }
   .hero-cut-button {
     clip-path: none;
@@ -188,12 +194,12 @@
     order: 10;
     width: 100%;
     height: 50px;
-    margin-top: 10px;
+    margin-top: 8px;
   }
   .hero-service {
     order: 11;
     width: 100%;
-    margin-top: 30px;
+    margin-top: 14px;
   }
 
   .discovery-section {
@@ -300,6 +306,10 @@
 @media (width <= 390px) {
   .hero-story h1 {
     font-size: 43px;
+  }
+  .hero-story > p:not(.eyebrow) {
+    margin: 8px auto 10px;
+    font-size: 9.5px;
   }
   .rug-window {
     max-height: 500px;
