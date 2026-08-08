@@ -22,7 +22,7 @@
     max-width: 390px;
     margin: 0 auto;
     padding-top: 10px;
-    font-size: clamp(43px, 12.2vw, 53px);
+    font-size: clamp(36.55px, 10.37vw, 45.05px);
     line-height: 0.84;
     letter-spacing: -0.055em;
   }
@@ -305,7 +305,7 @@
 
 @media (width <= 390px) {
   .hero-story h1 {
-    font-size: 43px;
+    font-size: 36.55px;
   }
   .hero-story > p:not(.eyebrow) {
     margin: 8px auto 10px;
