@@ -856,7 +856,7 @@
   align-items: center;
   gap: clamp(22px, 3vw, 48px);
   overflow: hidden;
-  margin: clamp(28px, 3.2vw, 46px) -5vw 0;
+  margin: clamp(38px, 4vw, 56px) -5vw clamp(40px, 4.2vw, 60px);
   padding: 20px 5vw;
   background: var(--ink);
   color: #fff;
@@ -1176,7 +1176,7 @@
 
   .price-edit-section {
     display: block;
-    margin: 30px -16px -72px;
+    margin: 32px -16px 36px;
     padding: 24px 16px 26px;
   }
 
