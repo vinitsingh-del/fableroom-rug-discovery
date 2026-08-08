@@ -1,0 +1,20 @@
+/* Keeps the expanded, style-led filter inside the existing toolbar. */
+.toolbar .chip-row {
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: calc(100% - 150px);
+}
+
+.toolbar .chip-row::-webkit-scrollbar {
+  display: none;
+}
+
+.toolbar > span {
+  flex: 0 0 auto;
+}
+
+@media (width <= 760px) {
+  .toolbar .chip-row {
+    max-width: 100%;
+  }
+}
