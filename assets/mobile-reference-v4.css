@@ -1,11 +1,11 @@
 /* Mobile reference alignment — deliberately scoped so desktop remains unchanged. */
 @media (width <= 760px) {
   .site-header {
-    height: 54.4px;
+    height: 46.24px;
   }
   .search-panel,
   .toolbar {
-    top: 54.4px;
+    top: 46.24px;
   }
   .hero-showcase {
     overflow: visible;
@@ -136,35 +136,36 @@
   }
   .hero-detail-image {
     order: 6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
     border: 0;
     width: 78px;
-    height: 76px;
-    margin: 9px auto 8px;
+    height: auto;
+    min-height: 51px;
+    margin: 8px auto 14px;
     overflow: visible;
     text-align: center;
   }
   .hero-detail-image::before {
-    content: "";
-    display: block;
-    width: 34px;
-    height: 34px;
-    margin: 0 auto 10px;
-    border-radius: 50%;
-    background: var(--gold);
-    opacity: 0.62;
+    content: none;
+    display: none;
   }
   .hero-detail-image img {
+    flex: 0 0 auto;
     width: 64px;
     height: 38px;
-    margin: auto;
+    margin: 0;
     object-fit: cover;
   }
   .hero-detail-image span {
     position: static;
     display: block;
     background: transparent;
-    padding: 7px 0 0;
+    padding: 0;
     font-size: 8px;
+    line-height: 1.2;
     letter-spacing: 0.11em;
     white-space: nowrap;
   }
@@ -364,6 +365,7 @@
 
 @media (width <= 760px) {
   .mobile-shopbar {
+    z-index: 1000;
     visibility: hidden;
     opacity: 0;
     pointer-events: none;
