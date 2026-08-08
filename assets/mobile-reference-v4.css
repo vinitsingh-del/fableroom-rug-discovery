@@ -13,8 +13,7 @@
     display: contents;
   }
   .hero-story > .eyebrow,
-  .hero-merch-heading,
-  .hero-rug-tabs {
+  .hero-merch-heading {
     display: none;
   }
   .hero-story h1 {
@@ -89,8 +88,24 @@
   .hero-product-title button {
     display: none;
   }
-  .hero-detail-image {
+  .hero-merch > .hero-rug-tabs {
     order: 5;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    width: 100%;
+    gap: 5px;
+    margin: 18px 0 5px;
+  }
+  .hero-rug-tabs button {
+    min-width: 0;
+    min-height: 32px;
+    padding: 4px 2px;
+    font-size: 9px;
+    line-height: 1;
+    white-space: nowrap;
+  }
+  .hero-detail-image {
+    order: 6;
     border: 0;
     width: 78px;
     height: 82px;
@@ -124,7 +139,7 @@
     white-space: nowrap;
   }
   .hero-product-copy {
-    order: 6;
+    order: 7;
     text-align: center;
     margin: 10px auto 16px;
     max-width: 390px;
@@ -132,7 +147,7 @@
     line-height: 1.55;
   }
   .hero-merch dl {
-    order: 7;
+    order: 8;
     width: 100%;
     margin: 0;
   }
@@ -144,7 +159,7 @@
     font-size: 10px;
   }
   .hero-story-actions {
-    order: 8;
+    order: 9;
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -170,13 +185,13 @@
     font-size: 10px;
   }
   .hero-product-cta {
-    order: 9;
+    order: 10;
     width: 100%;
     height: 50px;
     margin-top: 10px;
   }
   .hero-service {
-    order: 10;
+    order: 11;
     width: 100%;
     margin-top: 30px;
   }
@@ -215,13 +230,43 @@
     border-radius: 15px;
     overflow: hidden;
   }
+  .room-card:nth-child(3) {
+    order: 4;
+  }
+  .room-card:nth-child(4) {
+    order: 3;
+  }
+  .room-card::before {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    inset: -5%;
+    background-position: center;
+    background-size: cover;
+    animation: mobile-room-drift 8s ease-in-out infinite alternate;
+    will-change: transform;
+  }
+  .room-card:nth-child(1)::before {
+    background-image: url("./FRRU00013A_2.png");
+  }
+  .room-card:nth-child(2)::before {
+    background-image: url("./mobile-bedroom-rug-v1.webp");
+  }
+  .room-card:nth-child(3)::before {
+    background-image: url("./FRRU00070_runner.png");
+  }
+  .room-card:nth-child(4)::before {
+    background-image: url("./FRRU00072_render_d14b5be9-e3e0-442f-be28-3713e7a3b2e2.png");
+  }
   .room-card img,
   .room-card.room-tall img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    opacity: 0;
   }
   .room-overlay {
+    z-index: 1;
     grid-template-columns: 1fr auto;
     gap: 7px;
     padding: 54px 12px 14px;
@@ -240,6 +285,15 @@
   }
   .room-overlay > span {
     font-size: 18px;
+  }
+
+  @keyframes mobile-room-drift {
+    from {
+      transform: scale(1.02) translate3d(-1.2%, 0, 0);
+    }
+    to {
+      transform: scale(1.09) translate3d(1.2%, -0.8%, 0);
+    }
   }
 }
 
@@ -264,5 +318,12 @@
   }
   .room-overlay p {
     font-size: 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) and (width <= 760px) {
+  .room-card::before {
+    animation: none;
+    transform: scale(1.04);
   }
 }
