@@ -1,5 +1,12 @@
 /* Mobile reference alignment — deliberately scoped so desktop remains unchanged. */
 @media (width <= 760px) {
+  .site-header {
+    height: 54.4px;
+  }
+  .search-panel,
+  .toolbar {
+    top: 54.4px;
+  }
   .hero-showcase {
     overflow: visible;
   }
@@ -23,8 +30,25 @@
     margin: 0 auto;
     padding-top: 10px;
     font-size: clamp(36.55px, 10.37vw, 45.05px);
-    line-height: 0.84;
-    letter-spacing: -0.055em;
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    text-wrap: balance;
+  }
+  .hero-story h1 em {
+    display: inline-block;
+    white-space: nowrap;
+  }
+  .hero-story h1 .title-rug-dots {
+    margin-left: 4px;
+    transform: translateY(1px);
+  }
+  .hero-story h1 .title-rug-dots i {
+    width: 31px;
+    height: 31px;
+    border-width: 1.5px;
+  }
+  .hero-story h1 .title-rug-dots i + i {
+    margin-left: -8px;
   }
   .hero-story > p:not(.eyebrow) {
     order: 2;
